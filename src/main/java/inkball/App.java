@@ -33,35 +33,67 @@ public class App extends PApplet {
     public String configPath;
 
     public static Random random = new Random();
+
+    private Tile[][] board;
+    private HashMap<String, PImage> sprites = new HashMap<>();
 	
-	// Feel free to add any additional methods or attributes you want. Please put classes in different files.
-
     public App() {
-        this.configPath = "config.json";
+      this.configPath = "config.json";
     }
 
-    /**
-     * Initialise the setting of the window size.
-     */
-	@Override
+    /*
+      * Initialise the setting of the window size.
+    */
+	  @Override
     public void settings() {
-        size(WIDTH, HEIGHT);
+      size(WIDTH, HEIGHT);
     }
 
     /**
-     * Load all resources such as images. Initialise the elements such as the player and map elements.
-     */
+      * Load all resources such as images. Initialise the elements such as the player and map elements.
+    */
+    public Tile[][] getBoard() {
+      return this.board;
+    }
+
+    public PImage getSprite(String s) {
+      PImage result = sprites.get(s);
+      if (result == null) {
+        try {
+          result = loadImage(URLDecoder.decode(this.getClass().getResource(s+".png").getPath(), StandardCharsets.UTF_8.name()));
+        } catch (UnsupportedEncodingException e) {
+          throw new RuntimeException(e);
+        };
+        sprites.put(s, result);
+      }
+      return result;
+    }
+
 	@Override
     public void setup() {
         frameRate(FPS);
-		//See PApplet javadoc:
-		//loadJSONObject(configPath)
-		// the image is loaded from relative path: "src/main/resources/inkball/..."
-		/*try {
-            result = loadImage(URLDecoder.decode(this.getClass().getResource(filename+".png").getPath(), StandardCharsets.UTF_8.name()));
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }*/
+		  // See PApplet javadoc:
+		  // loadJSONObject(configPath)
+		  // the image is loaded from relative path: "src/main/resources/inkball/..."
+      String filenames[] = new String[] {
+        "ball0", "ball1", "ball2", "ball3", "ball4", "entrypoint", "hole0", "hole1", "hole2", "hole3", "hole4", "inkball_spritesheet", "tile", "wall0", "wall1", "wall2", "wall3", "wall4",
+      };
+
+      for (int i = 0; i < filenames.length; i++) {
+        getSprite(filenames[i]);
+      }
+
+      //create attributes for data storage, eg board
+      this.board = new Tile[(HEIGHT-TOPBAR)/CELLSIZE][WIDTH/CELLSIZE];
+
+      for (int i = 0; i < this.board.length; i++) {
+        for (int i2 = 0; i2 < this.board[i].length; i2++) {
+          this.board[i][i2] = new Tile(i2, i);
+        }
+      }
+
+      this.board[5][5] = new Wall(5, 5, "wall3");
+      this.board[10][12] = new Wall(12, 10, "wall4");
     }
 
     /**
@@ -103,7 +135,12 @@ public class App extends PApplet {
      */
 	@Override
     public void draw() {
-        
+      background(200,200,200);
+      for (int i = 0; i < this.board.length; i++) {
+        for (int i2 = 0; i2 < this.board[i].length; i2++) {
+          this.board[i][i2].draw(this);
+        }
+      }
 
         //----------------------------------
         //display Board for current level:
@@ -114,7 +151,7 @@ public class App extends PApplet {
         //display score
         //----------------------------------
         //TODO
-        
+
 		//----------------------------------
         //----------------------------------
 		//display game end message
