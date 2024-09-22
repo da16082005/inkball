@@ -6,7 +6,9 @@ import processing.data.JSONArray;
 import processing.data.JSONObject;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -68,12 +70,25 @@ public class App extends PApplet {
       }
       return result;
     }
+    /*@Override
+    public void loadJSONObject(String configPath){
+      ObjectMapper objectMapper = new ObjectMapper();
+      try{
+        Config config = objectMapper.readValue(new File(configPath),Config.class);
+
+      }catch (IOException e){
+        e.printStackTrace();
+      }
+
+
+    }
+    */
 
 	@Override
     public void setup() {
         frameRate(FPS);
 		  // See PApplet javadoc:
-		  // loadJSONObject(configPath)
+		  JSONObject config= loadJSONObject(configPath);
 		  // the image is loaded from relative path: "src/main/resources/inkball/..."
       String filenames[] = new String[] {
         "ball0", "ball1", "ball2", "ball3", "ball4", "entrypoint", "hole0", "hole1", "hole2", "hole3", "hole4", "inkball_spritesheet", "tile", "wall0", "wall1", "wall2", "wall3", "wall4",
