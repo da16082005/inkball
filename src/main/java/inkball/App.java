@@ -96,8 +96,8 @@ public class App extends PApplet {
     // See PApplet javadoc:
     JSONObject loadedConfig = loadJSONObject(configPath);
     this.config = new Config(loadedConfig);
-    System.out.println(this.config.score_increase_from_hole_capture.toString());
-    System.out.println(this.config.score_decrease_from_wrong_hole.toString());
+    //System.out.println(this.config.score_increase_from_hole_capture.toString());
+    //System.out.println(this.config.score_decrease_from_wrong_hole.toString());
 
     // the image is loaded from relative path: "src/main/resources/inkball/..."
     String filenames[] = new String[] {

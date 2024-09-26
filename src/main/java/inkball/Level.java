@@ -10,6 +10,14 @@ public class Level {
 
   public Level(String layout, int time, int spawn_interval, double score_increase_from_hole_capture_modifier,
       double score_decrease_from_wrong_hole_modifier, String[] balls) {
+        this.layout= layout;
+        this.time= time;
+        this.spawn_interval= spawn_interval;
+        this.score_increase_from_hole_capture_modifier= score_increase_from_hole_capture_modifier;
+        this.score_decrease_from_wrong_hole_modifier= score_decrease_from_wrong_hole_modifier;
+        this.balls = balls;
+        
+
 
   }
 }
