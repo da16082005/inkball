@@ -120,6 +120,7 @@ public class App extends PApplet {
 
     this.board[5][5] = new Wall(5, 5, "wall3");
     this.board[10][12] = new Wall(12, 10, "wall4");
+    this.board[8][3]= new Spawner(3,8);
   }
 
   /**
