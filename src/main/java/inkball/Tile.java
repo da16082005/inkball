@@ -10,15 +10,19 @@ public class Tile {
 
     protected int x;
     protected int y;
+    protected boolean is_covered;
 
     public Tile (int x, int y) {
         this.x = x;
         this.y = y;
+        this.is_covered= false;
     }
 
     public void draw(App app) {
-        PImage tile = app.getSprite("tile");
-        app.image(tile, x*App.CELLSIZE, y*App.CELLSIZE+App.TOPBAR);
+        if(this.is_covered== false){
+            PImage tile = app.getSprite("tile");
+            app.image(tile, x*App.CELLSIZE, y*App.CELLSIZE+App.TOPBAR);
+        }
     }
 
     public List<Tile> getAdjacentTiles(App app) {

@@ -1,10 +1,11 @@
 package inkball;
 import processing.core.PImage;
 
-class Spawner extends Tile  {
+public class Spawner extends Tile  {
 
     public Spawner(int x, int y){
         super(x, y);
+        this.is_covered= true;
     }
     public void draw(App app){
         PImage tile= app.getSprite("entrypoint");

@@ -12,6 +12,7 @@ class Wall extends Tile {
   public Wall(int x, int y, String color) {
     super(x, y);
     this.color = color; // wall0, or wall1
+    this.is_covered= true;
   }
 
   public void draw(App app) {
