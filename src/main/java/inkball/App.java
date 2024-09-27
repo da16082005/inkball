@@ -107,8 +107,8 @@ public class App extends PApplet {
     }
 
     // create attributes for data storage, eg board
-    System.out.println(config.levels[0].getLayout());
-    this.board = config.levels[0].loadLayout(this, config.levels[0].getLayout());
+    
+    this.board = config.levels[1].loadLayout(this, config.levels[1].getLayout());
   }
 
   /**

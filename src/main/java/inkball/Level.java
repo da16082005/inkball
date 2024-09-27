@@ -47,6 +47,67 @@ public class Level {
           if (ch == 'X') {
             board[row][i] = new Wall(i, row, "wall0");
           }
+          else if(ch=='1'){
+            if (i==0){
+              board[row][i]= new Wall(i, row, "wall1");
+            }
+            else if( line.charAt(i-1)!= 'H' && line.charAt(i-1)!= 'B') {
+              board[row][i]= new Wall(i, row, "wall1");
+            
+            }
+          }  
+          else if (ch=='2' && line.charAt(i-1)!= 'H' && line.charAt(i-1)!= 'B') {
+            if (i==0){
+              board[row][i]= new Wall(i, row, "wall2");
+            }
+            else if( line.charAt(i-1)!= 'H' && line.charAt(i-1)!= 'B') {
+              
+              board[row][i]= new Wall(i, row, "wall2");
+            }
+          }
+          else if (ch=='3'&& line.charAt(i-1)!= 'H' && line.charAt(i-1)!= 'B'){
+            board[row][i]= new Wall(i, row, "wall3");
+            if (i==0){
+              board[row][i]= new Wall(i, row, "wall3");
+            }
+            else if( line.charAt(i-1)!= 'H' && line.charAt(i-1)!= 'B') {
+              
+              board[row][i]= new Wall(i, row, "wall3");
+            }
+          }
+          else if (ch=='4'&& line.charAt(i-1)!= 'H' && line.charAt(i-1)!= 'B'){
+            if (i==0){
+              board[row][i]= new Wall(i, row, "wall4");
+            }
+            else if( line.charAt(i-1)!= 'H' && line.charAt(i-1)!= 'B') {
+              board[row][i]= new Wall(i, row, "wall4");
+              
+            }
+            
+          }
+          else if (ch=='S'){
+            board[row][i]= new Spawner(i, row);
+          }
+          else if (ch=='H'){
+            if(line.charAt(i+1)=='0'){
+              board[row][i]= new Hole(i, row, "hole0",0,0,0,0,board[row+1][i], board[row][i+1] ,board[row+1][i+1]);
+            }
+            else if (line.charAt(i+1)=='1'){
+              board[row][i]= new Hole(i,row,"hole1",0,0,0,0,board[row+1][i], board[row][i+1] ,board[row+1][i+1]);
+    
+            }
+            else if (line.charAt(i+1)=='2'){
+              board[row][i]= new Hole(i,row,"hole2",0,0,0,0,board[row+1][i], board[row][i+1] ,board[row+1][i+1]);
+    
+            }
+            else if (line.charAt(i+1)=='3'){
+              board[row][i]= new Hole(i,row,"hole3",0,0,0,0,board[row+1][i], board[row][i+1] ,board[row+1][i+1]);
+            }
+            else if (line.charAt(i+1)=='4'){
+              board[row][i]= new Hole(i,row,"hole4",0,0,0,0,board[row+1][i], board[row][i+1] ,board[row+1][i+1]);
+            }
+          }
+
         }
         line = br.readLine();
         row += 1;
@@ -56,5 +117,7 @@ public class Level {
     }
 
     return board;
+
   }
+
 }
