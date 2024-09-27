@@ -93,11 +93,8 @@ public class App extends PApplet {
   public void setup() {
     frameRate(FPS);
 
-    // See PApplet javadoc:
     JSONObject loadedConfig = loadJSONObject(configPath);
     this.config = new Config(loadedConfig);
-    //System.out.println(this.config.score_increase_from_hole_capture.toString());
-    //System.out.println(this.config.score_decrease_from_wrong_hole.toString());
 
     // the image is loaded from relative path: "src/main/resources/inkball/..."
     String filenames[] = new String[] {
@@ -110,19 +107,8 @@ public class App extends PApplet {
     }
 
     // create attributes for data storage, eg board
-    this.board = new Tile[(HEIGHT - TOPBAR) / CELLSIZE][WIDTH / CELLSIZE];
-
-    for (int i = 0; i < this.board.length; i++) {
-      for (int i2 = 0; i2 < this.board[i].length; i2++) {
-        this.board[i][i2] = new Tile(i2, i);
-      }
-    }
-
-    this.board[5][5] = new Wall(5, 5, "wall3");
-    this.board[10][12] = new Wall(12, 10, "wall4");
-    this.board[8][3]= new Spawner(3,8);
-    this.board[6][9]= new Hole(9,6,"hole3",5.0,6.9,60,48,this.board[10][6],this.board[9][7],this.board[10][7]);
-    
+    System.out.println(config.levels[0].getLayout());
+    this.board = config.levels[0].loadLayout(this, config.levels[0].getLayout());
   }
 
   /**
@@ -164,6 +150,7 @@ public class App extends PApplet {
    */
   @Override
   public void draw() {
+    // display Board for current level:
     background(200, 200, 200);
     for (int i = 0; i < this.board.length; i++) {
       for (int i2 = 0; i2 < this.board[i].length; i2++) {
@@ -171,20 +158,9 @@ public class App extends PApplet {
       }
     }
 
-    // ----------------------------------
-    // display Board for current level:
-    // ----------------------------------
-    // TODO
-
-    // ----------------------------------
     // display score
-    // ----------------------------------
-    // TODO
 
-    // ----------------------------------
-    // ----------------------------------
     // display game end message
-
   }
 
   public static void main(String[] args) {
