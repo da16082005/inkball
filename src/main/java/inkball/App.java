@@ -37,6 +37,7 @@ public class App extends PApplet {
   public static Random random = new Random();
 
   private Tile[][] board;
+  private Ball[] balls;
   private HashMap<String, PImage> sprites = new HashMap<>();
   private Config config;
 
@@ -107,8 +108,9 @@ public class App extends PApplet {
     }
 
     // create attributes for data storage, eg board
-    
-    this.board = config.levels[1].loadLayout(this, config.levels[1].getLayout());
+    this.board = config.levels[0].loadLayout(this, config.levels[0].getLayout());
+
+    this.balls = config.levels[0].loadBalls(this, config.levels[0].getLayout());
   }
 
   /**
@@ -150,12 +152,17 @@ public class App extends PApplet {
    */
   @Override
   public void draw() {
-    // display Board for current level:
+    // display board for current level:
     background(200, 200, 200);
     for (int i = 0; i < this.board.length; i++) {
       for (int i2 = 0; i2 < this.board[i].length; i2++) {
         this.board[i][i2].draw(this);
       }
+    }
+
+    // display balls for current level
+    for (int i = 0; i < this.balls.length; i++) {
+      this.balls[i].draw(this);
     }
 
     // display score
